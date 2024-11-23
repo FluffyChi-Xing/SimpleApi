@@ -1,0 +1,1 @@
+``将仓颉Linux SDK x64 0.53.13版本放置于此目录中，确保 `envsetup.sh` 位于 `./cangjie/envsetup.sh` 。``

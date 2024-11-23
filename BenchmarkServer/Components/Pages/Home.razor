@@ -1,0 +1,15 @@
+﻿@page "/"
+@using System.Text.Json
+@using Shared
+@using TheSalLab.GeneralReturnValues
+
+<PageTitle>Home</PageTitle>
+
+<h1>Benchmark Server</h1>
+
+<button @onclick="StartAsync" disabled="@_isDisabled">开始评测</button>
+
+<br/>
+<br/>
+
+<textarea @bind="@_result" cols="120" rows="20"></textarea>
