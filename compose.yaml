@@ -1,28 +1,27 @@
-﻿version: '3.4'
+﻿version: "3.4"
 
 name: reverseproxybenchmark
 
 services:
+  # reverseproxybenchmark-gateway:
+  #   image: envoyproxy/envoy:v1.31.2
+  #   volumes:
+  #     - ./envoy.yaml:/etc/envoy/envoy.yaml
+  #   networks:
+  #     - reverseproxybenchmark-network
+  #   ports:
+  #     - "41441:80"
+
   reverseproxybenchmark-gateway:
-    image: envoyproxy/envoy:v1.31.2
-    volumes:
-      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    image: reverseproxybenchmark-gateway
+    build:
+      context: .
+      dockerfile: cangjie_gateway/Dockerfile
     networks:
       - reverseproxybenchmark-network
     ports:
-      - "41441:80"
-        
-#  reverseproxybenchmark-gateway:
-#    image: reverseproxybenchmark-gateway
-#    build:
-#      context: .
-#      dockerfile: cangjie_gateway/Dockerfile
-#    networks:
-#      - reverseproxybenchmark-network
-#    ports:
-#      - "41439:80"
-  
-  
+      - "41439:80"
+
   reverseproxybenchmark-backendserver-1:
     image: reverseproxybenchmark-backendserver
     build:
@@ -34,7 +33,6 @@ services:
       - reverseproxybenchmark-network
     ports:
       - "41442:8080"
-
 
   reverseproxybenchmark-backendserver-2:
     image: reverseproxybenchmark-backendserver
@@ -48,7 +46,6 @@ services:
     ports:
       - "41443:8080"
 
-
   reverseproxybenchmark-backendserver-3:
     image: reverseproxybenchmark-backendserver
     build:
@@ -60,8 +57,6 @@ services:
       - reverseproxybenchmark-network
     ports:
       - "41444:8080"
-    
-
 
   reverseproxybenchmark-benchmarkserver:
     image: reverseproxybenchmark-benchmarkserver
@@ -72,7 +67,6 @@ services:
       - reverseproxybenchmark-network
     ports:
       - "41440:8080"
-
 
 networks:
   reverseproxybenchmark-network:
